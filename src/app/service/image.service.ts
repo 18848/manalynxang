@@ -10,7 +10,7 @@ export class ImageService {
 	public image: string;
 
 	constructor(private http: HttpClient) { 
-        localStorage.setItem('user_image', 'https/randomuser.me/api/portraits/women/46.jpg');
+        localStorage.setItem('user_image', 'https://randomuser.me/api/portraits/women/46.jpg');
 		this.loadImage();
 	} 
 
