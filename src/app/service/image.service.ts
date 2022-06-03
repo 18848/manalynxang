@@ -10,12 +10,12 @@ export class ImageService {
 	public image: string;
 
 	constructor(private http: HttpClient) { 
-        localStorage.setItem('user_image', 'https://randomuser.me/api/portraits/women/46.jpg');
 		this.loadImage();
 	} 
 
 	loadImage(){
-		this.http.get<any>('https://randomuser.me/api/?inc=picture').subscribe(x=> localStorage.setItem('user_image', x.results[0].picture.large));
+        localStorage.setItem('user_image', 'https://randomuser.me/api/portraits/women/46.jpg');
+		//this.http.get<any>('https://randomuser.me/api/?inc=picture').subscribe(x=> localStorage.setItem('user_image', x.results[0].picture.large));
 	}
 
 	getImage(): string{
