@@ -151,7 +151,7 @@ export class LeadsComponent implements OnInit {
   }
 
   saveLead(){
-      console.log(this.newLead)
+    // console.log(this.newLead)
     this.newLead.isLead = 1;
     this.newLead.pessoa.estadoCivil = this.estadoCivil.name;
     // If Exists: Update
@@ -168,6 +168,7 @@ export class LeadsComponent implements OnInit {
       else{
         this.addNewLead();
       }
+      this.getLeads();
     });
   }
 
@@ -207,6 +208,7 @@ export class LeadsComponent implements OnInit {
           }
         });
       }
+      this.getContactos();
     });
   }
 
@@ -266,6 +268,7 @@ export class LeadsComponent implements OnInit {
           }
         });
       }
+      this.getVeiculos();
     });
   }
 
