@@ -70,7 +70,7 @@
             <ng-template pTemplate="body" let-cliente>
                 <tr (click)="selectCliente(cliente)">
                     <td style="min-width: 1rem;">
-                        <button pButton pRipple class="p-button-danger" icon="pi pi-trash" (click)="deleteContacto(contacto)"></button>
+                        <button pButton pRipple class="p-button-danger" icon="pi pi-trash" (click)="deleteCliente(cliente)"></button>
                     </td>
                     <td style="min-width: 2rem;">
                         {{cliente.id}}
