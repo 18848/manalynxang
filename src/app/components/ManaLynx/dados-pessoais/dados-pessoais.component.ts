@@ -81,11 +81,6 @@ export class DadosPessoaisComponent implements OnInit {
     if(this.userRole === "Cliente"){
       this.leadsService.getCliente(0).subscribe(res => {
         this.cliente = res[0];
-        if(this.auth.isNewRegister(this.cliente)){
-          this.cliente = new Cliente();
-          this.pessoa = new Pessoa();
-          return;
-        }
         this.pessoa = this.cliente.pessoa;
         this.pessoa.dataNascimento = this.pessoa.dataNascimento.split("T")[0];
         this.pessoa.validadeCc = this.pessoa.validadeCc.split("T")[0];
@@ -106,6 +101,7 @@ export class DadosPessoaisComponent implements OnInit {
     this.pessoa.estadoCivil = this.estadoCivil.name;
     this.cliente.pessoa = this.pessoa;
     if(this.userRole === "Cliente"){
+      console.log(this.cliente);
       this.saveCliente();
     }
     else{
@@ -116,6 +112,7 @@ export class DadosPessoaisComponent implements OnInit {
   saveCliente(){
     this.leadsService.updateCliente(this.cliente).subscribe(res => {
       if(res['error'] === undefined){
+        window.location.reload();
       }
     });
   }
