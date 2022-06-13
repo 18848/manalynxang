@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 import {Router} from "@angular/router";
 import { Cliente } from '../data/Cliente';
 import { Pessoa } from '../data/Pessoa';
+import { UrlService } from '../service/url.service';
 
 interface MyToken {
     Id: string;
@@ -33,22 +34,20 @@ export class AuthService {
             'content-type':  'application/json',
             Authorization: 'my-auth-token'
     });
-    endpoint: string = "https://quiet-crag-88107.herokuapp.com/"
-    constructor(private http: HttpClient,public router: Router) { }
+    constructor(private http: HttpClient, public router: Router, private url: UrlService) { }
 
 	register(user:RegisterRequest): void{
-        console.log(user);
-        this.http.post<RegisterRequest>(this.endpoint + "ManaUser/Register", user, { 'headers': this.headers })
+        this.http.post<RegisterRequest>(this.url.backend + "ManaUser/Register", user, { 'headers': this.headers })
                  .subscribe(res => this.login(user.username, user.password));
 	}
 
     login(username:string, password:string ) {
-        this.http.post<User>(this.endpoint + "ManaUser/Login", {username, password},{ 'headers': this.headers })
+        this.http.post<User>(this.url.backend + "ManaUser/Login", {username, password},{ 'headers': this.headers })
         .subscribe(res => this.setSession(res) );
     }
 
     isPessoaEmpty(id: number = 0): Observable<boolean>{
-        this.http.get<Cliente[]>(this.endpoint + "Cliente/Index/" + id.toString(), {'headers': this.headers})
+        this.http.get<Cliente[]>(this.url.backend + "Cliente/Index/" + id.toString(), {'headers': this.headers})
         .subscribe(res => {
             this.cliente = res[0];
             console.log(this.cliente);
@@ -63,10 +62,12 @@ export class AuthService {
     }
 
     loggedCliente(){
-        return this.http.get<Cliente[]>(this.endpoint + "Cliente/Index/0", {'headers': this.headers});
+        return this.http.get<Cliente[]>(this.url.backend + "Cliente/Index/0", {'headers': this.headers});
     }
 
     isNewRegister(cliente: Cliente){
+        console.log(cliente);
+        if(cliente == null || cliente.pessoa == null) return true;
         if(cliente.pessoa.nif === null || cliente.pessoa.dataNascimento === null || cliente.pessoa.estadoCivil === null 
             || cliente.pessoa.nss === null || cliente.pessoa.validadeCc === null || cliente.pessoa.nacionalidade === null
             || cliente.pessoa.nus === null || cliente.pessoa.nome === null || cliente.pessoa.cc === null

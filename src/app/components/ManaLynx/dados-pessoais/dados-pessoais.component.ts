@@ -81,6 +81,11 @@ export class DadosPessoaisComponent implements OnInit {
     if(this.userRole === "Cliente"){
       this.leadsService.getCliente(0).subscribe(res => {
         this.cliente = res[0];
+        if(this.auth.isNewRegister(this.cliente)){
+          this.cliente = new Cliente();
+          this.pessoa = new Pessoa();
+          return;
+        }
         this.pessoa = this.cliente.pessoa;
         this.pessoa.dataNascimento = this.pessoa.dataNascimento.split("T")[0];
         this.pessoa.validadeCc = this.pessoa.validadeCc.split("T")[0];

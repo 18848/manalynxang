@@ -93,9 +93,8 @@ export class RegisterClienteComponent implements OnInit, OnDestroy {
       
       if(invalid) return;
       
-      let url: string = "https://quiet-crag-88107.herokuapp.com/ManaUser/ClienteRegister"
       this.authService.register(this.user);
-      this.router.navigateByUrl(url);
+      this.router.navigate(['dadospessoais']);
     }
     
     //#region Password Validations
