@@ -115,6 +115,16 @@
             </div>
             <div class="p-formgrid grid">
                 <div class="field col">
+                    <label htmlFor="cilindrada">Cilindrada</label>
+                    <input pInputText id="cilindrada" type="text" [(ngModel)]="newVeiculo.cilindrada"/>
+                </div>
+                <div class="field col">
+                    <label htmlFor="potencia">Potência</label>
+                    <input pInputText id="potencia" type="text" [(ngModel)]="newVeiculo.potencia"/>
+                </div>
+            </div>
+            <div class="p-formgrid grid">
+                <div class="field col">
                     <label htmlFor="matricula">Matrícula</label>
                     <input pInputText id="matricula" type="text" [(ngModel)]="newVeiculo.matricula"/>
                 </div>
@@ -141,20 +151,7 @@
                     <input pInputText id="peso" type="text" [(ngModel)]="newVeiculo.peso"/>
                 </div>
             </div>
-            <div class="p-formgrid grid">
-                <div class="field col">
-                    <label htmlFor="cilindrada">Cilindrada</label>
-                    <input pInputText id="cilindrada" type="text" [(ngModel)]="newVeiculo.cilindrada"/>
-                </div>
-                <div class="field col">
-                    <label htmlFor="potencia">Potência</label>
-                    <input pInputText id="potencia" type="text" [(ngModel)]="newVeiculo.potencia"/>
-                </div>
-                <div class="field col">
-                    <label htmlFor="lugares">Lugares</label>
-                    <input pInputText id="lugares" type="text" [(ngModel)]="newVeiculo.lugares"/>
-                </div>
-            </div>
+            
         </div>
     </div>
 
