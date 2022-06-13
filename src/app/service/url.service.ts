@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class UrlService {
 
   public get backend() : string {
-    return 'https://quiet-crag-88107.herokuapp.com/';
+    // return 'https://quiet-crag-88107.herokuapp.com/';
+    return 'https://localhost:7064/';
   }
 
   public get frontend() : string {

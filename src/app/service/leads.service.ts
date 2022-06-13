@@ -40,7 +40,7 @@ export class LeadsService {
   }
 
   deleteCliente(cliente: Cliente){
-    return this.http.post(this.url.backend + "Cliente/Delete/" + cliente.id.toString(), {headers: this.headers});
+    return this.http.delete(this.url.backend + "Cliente/Delete?clienteId=" + cliente.id.toString(), {headers: this.headers});
   }
 
   postContacto(lead: Contacto){

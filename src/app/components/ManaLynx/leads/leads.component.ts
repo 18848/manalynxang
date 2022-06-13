@@ -9,6 +9,7 @@ import { VeiculoService } from 'src/app/service/veiculo.service';
 import { Veiculo } from 'src/app/data/Veiculo';
 import { AuthService } from 'src/app/auth/auth.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leads',
@@ -39,7 +40,7 @@ export class LeadsComponent implements OnInit {
   tiposContacto: SelectItem[] = [];
 
   constructor(private leadsService: LeadsService, private veiculoService: VeiculoService
-    , private auth: AuthService) { }
+    , private router: Router) { }
   
   ngOnInit(): void {
     this.getEstadosCivis();
@@ -77,6 +78,8 @@ export class LeadsComponent implements OnInit {
 
   //#region Leads
   getLeads(){
+    this.clientes = [];
+    this.leads = [];
     this.leadsService.getClientes().subscribe(res => {
       if(res !== undefined && res.length > 0){
         res.forEach(element => {
@@ -173,11 +176,12 @@ export class LeadsComponent implements OnInit {
   }
 
   deleteCliente(cliente:Cliente){
+    this.createCliente = false;
+    this.newLead = new Cliente();
     this.leadsService.deleteCliente(cliente).subscribe(res => {
-      if(res['error'] === undefined){
         this.getLeads();
-      }
-    });
+      });
+    window.location.reload();
   }
   //#endregion
 
@@ -305,9 +309,11 @@ export class LeadsComponent implements OnInit {
   }
 
   selectCliente(cliente: Cliente){
-    this.createCliente = true;
     this.newLead = cliente;
     this.getDadosPessoais(cliente);
+    if(this.newLead != null){
+      this.createCliente = true;
+    }
     this.leadsService.getContacto(cliente.pessoaId).subscribe(res => {
       this.contactos = res;
     });
